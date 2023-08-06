@@ -2,9 +2,8 @@ import express from 'express';
 import cors from 'cors';
 
 import authRouter from './auth/auth-router.js';
-
-import { notFound } from './middlewares.js';
 import errorHandler from './error-handler.js';
+import { notFound } from './middlewares.js';
 
 const app = express();
 app.use(express.json());

@@ -1,26 +1,19 @@
 import * as bcrypt from 'bcrypt';
 
 import User from '../user/user-model.js';
+import { createUser } from '../user/user-service.js';
 import { signToken } from './utils.js';
 
 const signup = async (req, res, next) => {
 	try {
 		const { password, email } = req.body;
-		const hashedPassword = bcrypt.hashSync(password, 10);
 
-		const user = new User({
-			email,
-			password: hashedPassword,
-		});
-		await user.save();
-
-		const userToSend = user.toJSON();
-		delete userToSend.password;
+		const user = await createUser({ password, email });
 
 		res.status(201).json({
 			success: true,
 			data: {
-				user: userToSend,
+				user,
 			},
 		});
 	} catch (err) {

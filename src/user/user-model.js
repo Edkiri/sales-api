@@ -17,15 +17,13 @@ const UserSchema = new Schema(
 
 		password: { type: String, required: true, trim: true, minLength: 6 },
 
-		roles: {
-			type: [{ type: String, enum: Object.values(roles) }],
-			trim: true,
-			default: [roles.CLIENT],
+		role: {
+			type: String,
+			enum: Object.values(roles),
+			default: roles.CLIENT,
 		},
-
-		onBoarded: { type: Boolean, default: false },
 	},
-	{ strict: true, timestamps: true }
+	{ strict: true, timestamps: true, versionKey: false }
 );
 
 const User = model('User', UserSchema);

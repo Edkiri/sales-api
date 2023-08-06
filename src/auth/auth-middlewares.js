@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 
 import config from '../config';
-import User from '../user/user-model.js';
+import User, { roles } from '../user/user-model.js';
 
 export const isAuthenticated = async (req, res, next) => {
 	try {
@@ -24,18 +24,7 @@ export const isAuthenticated = async (req, res, next) => {
 
 export const isAdmin = async (req, res, next) => {
 	const { user } = req;
-	if (!user.roles.includes('admin') && !user.roles.includes('superadmin')) {
-		const error = new Error('Unauthorized');
-		return next(error);
-	}
-	return next();
-};
-
-export const isDentist = async (req, res, next) => {
-	const { user } = req;
-	if (user.roles.includes('admin') || user.roles.includes('superadmin')) return next();
-
-	if (!user.roles.includes('dentist')) {
+	if (user.role !== roles.ADMIN && user.role !== roles.SUPERADMIN) {
 		const error = new Error('Unauthorized');
 		return next(error);
 	}
