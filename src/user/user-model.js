@@ -1,7 +1,7 @@
 import { model, Schema } from 'mongoose';
 
 export const roles = {
-	CLIENT: 'client',
+	USER: 'user',
 	ADMIN: 'admin',
 	SUPERADMIN: 'superadmin',
 };
@@ -20,7 +20,7 @@ const UserSchema = new Schema(
 		role: {
 			type: String,
 			enum: Object.values(roles),
-			default: roles.CLIENT,
+			default: roles.USER,
 		},
 	},
 	{ strict: true, timestamps: true, versionKey: false }
