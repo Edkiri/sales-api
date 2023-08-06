@@ -28,6 +28,6 @@ const clientSchema = new Schema(
 	{ strict: true, timestamps: true, versionKey: false }
 );
 
-const ClientModel = model('Client', clientSchema);
+const Client = model('Client', clientSchema);
 
-export default ClientModel;
+export default Client;

@@ -38,6 +38,6 @@ const saleSchema = new Schema(
 	{ strict: true, timestamps: true, versionKey: false }
 );
 
-const SaleModel = model('Sale', saleSchema);
+const Sale = model('Sale', saleSchema);
 
-export default SaleModel;
+export default Sale;
